@@ -58,6 +58,7 @@
 	import ChannelItem from './Sidebar/ChannelItem.svelte';
 	import PencilSquare from '../icons/PencilSquare.svelte';
 	import Home from '../icons/Home.svelte';
+	import { base } from '$app/paths';
 
 	const BREAKPOINT = 768;
 
@@ -503,11 +504,11 @@
 			<a
 				id="sidebar-new-chat-button"
 				class="flex justify-between items-center flex-1 rounded-lg px-2 py-1 h-full text-right hover:bg-gray-100 dark:hover:bg-gray-900 transition no-drag-region"
-				href="/"
+				href="{base}/"
 				draggable="false"
 				on:click={async () => {
 					selectedChatId = null;
-					await goto('/');
+					await goto(`${base}/`);
 					const newChatButton = document.getElementById('new-chat-button');
 					setTimeout(() => {
 						newChatButton?.click();
@@ -521,8 +522,8 @@
 					<div class="self-center mx-1.5">
 						<img
 							crossorigin="anonymous"
-							src="{WEBUI_BASE_URL}/static/favicon.png"
-							class=" size-5 -translate-x-1.5 rounded-full"
+							src="{base}/favicon.png"
+							class=" size-5 -translate-x-1.5"
 							alt="logo"
 						/>
 					</div>
@@ -541,7 +542,7 @@
 			<div class="px-1.5 flex justify-center text-gray-800 dark:text-gray-200">
 				<a
 					class="grow flex items-center space-x-3 rounded-lg px-2 py-[7px] hover:bg-gray-100 dark:hover:bg-gray-900 transition"
-					href="/home"
+					href="{base}/home"
 					on:click={() => {
 						selectedChatId = null;
 						chatId.set('');
@@ -567,7 +568,7 @@
 			<div class="px-1.5 flex justify-center text-gray-800 dark:text-gray-200">
 				<a
 					class="grow flex items-center space-x-3 rounded-lg px-2 py-[7px] hover:bg-gray-100 dark:hover:bg-gray-900 transition"
-					href="/workspace"
+					href="{base}/workspace"
 					on:click={() => {
 						selectedChatId = null;
 						chatId.set('');

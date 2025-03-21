@@ -10,6 +10,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { mobile, showSidebar, knowledge as _knowledge } from '$lib/stores';
+	import { base } from '$app/paths';
 
 	import { updateFileDataContentById, uploadFile, deleteFileById } from '$lib/apis/files';
 	import {
@@ -515,7 +516,7 @@
 		if (res) {
 			knowledge = res;
 		} else {
-			goto('/workspace/knowledge');
+			goto(`${base}/workspace/knowledge`);
 		}
 
 		const dropZone = document.querySelector('body');
@@ -678,7 +679,7 @@
 								<div class=" flex-1 text-xl font-medium">
 									<a
 										class="hover:text-gray-500 dark:hover:text-gray-100 hover:underline grow line-clamp-1"
-										href={selectedFile.id ? `/api/v1/files/${selectedFile.id}/content` : '#'}
+										href={selectedFile.id ? `${base}/api/v1/files/${selectedFile.id}/content` : '#'}
 										target="_blank"
 									>
 										{selectedFile?.meta?.name}

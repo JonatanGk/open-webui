@@ -3,6 +3,7 @@
 	import { toast } from 'svelte-sonner';
 	import mermaid from 'mermaid';
 	import { PaneGroup, Pane, PaneResizer } from 'paneforge';
+	import { base } from '$app/paths';
 
 	import { getContext, onDestroy, onMount, tick } from 'svelte';
 	const i18n: Writable<i18nType> = getContext('i18n');
@@ -166,7 +167,7 @@
 				const chatInput = document.getElementById('chat-input');
 				chatInput?.focus();
 			} else {
-				await goto('/');
+				await goto(`${base}/`);
 			}
 		})();
 	}
@@ -404,7 +405,7 @@
 			});
 		} else {
 			if ($temporaryChatEnabled) {
-				await goto('/');
+				await goto(`${base}/`);
 			}
 		}
 
@@ -699,7 +700,7 @@
 		await showArtifacts.set(false);
 
 		if ($page.url.pathname.includes('/c/')) {
-			window.history.replaceState(history.state, '', `/`);
+			window.history.replaceState(history.state, '', `${base}/`);
 		}
 
 		autoScroll = true;
@@ -775,7 +776,7 @@
 	const loadChat = async () => {
 		chatId.set(chatIdProp);
 		chat = await getChatById(localStorage.token, $chatId).catch(async (error) => {
-			await goto('/');
+			await goto(`${base}/`);
 			return null;
 		});
 
@@ -1840,7 +1841,7 @@
 			await chats.set(await getChatList(localStorage.token, $currentChatPage));
 			currentChatPage.set(1);
 
-			window.history.replaceState(history.state, '', `/c/${_chatId}`);
+			window.history.replaceState(history.state, '', `${base}/c/${_chatId}`);
 		} else {
 			_chatId = 'local';
 			await chatId.set('local');
